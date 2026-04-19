@@ -1,3 +1,4 @@
+package hust.soict.hedspi.lab01;
 import java.util.Scanner;
 
 public class Day_of_a_month{

@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="AimsProject/src"/>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="OtherProject"/>
 	<classpathentry kind="output" path="AimsProject/bin"/>
 </classpath>
