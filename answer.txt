@@ -1,1 +1,15 @@
-Java không cho phép bạn tạo một hàm tạo (constructor) để khởi tạo một đĩa DVD theo tiêu đề (title), rồi lại tạo thêm một hàm tạo khác để khởi tạo DVD theo danh mục (category), bởi vì hành động này sẽ tạo ra hai hàm tạo có cùng chữ ký (cùng tên hàm, cùng kiểu dữ liệu của tham số là String), và điều này không được phép trong Java. Việc nạp chồng hàm tạo (Constructor overloading) chỉ hợp lệ khi các hàm tạo có chữ ký khác nhau, nghĩa là chúng phải khác nhau ở ít nhất một trong các yếu tố sau: số lượng tham số, kiểu dữ liệu của tham số, hoặc thứ tự các kiểu dữ liệu của tham số.
+Câu 1: Java là Pass by Value hay Pass by Reference?
+--> Java là ngôn ngữ truyền tham số theo giá trị (Pass by Value).
+Câu 2: Sau khi gọi swap(jungleDVD, cinderellaDVD) tại sao tiêu đề của hai đối tượng không thay đổi?
+--> Do Java sử dụng cơ chế pass-by-value, nên khi gọi hàm swap, các tham số jungleDVD và cinderellaDVD được truyền vào dưới dạng bản sao của tham chiếu (reference). Bên trong hàm swap, việc hoán đổi chỉ xảy ra với các bản sao này, không ảnh hưởng đến các biến ban đầu trong hàm main. Vì vậy, sau khi gọi hàm, hai đối tượng vẫn giữ nguyên tiêu đề ban đầu.
+Câu 3: Sau khi gọi changeTitle(jungleDVD, cinderellaDVD.getTitle()) tại sao tiêu đề của JungleDVD lại thay đổi?
+--> Trong lời gọi hàm này, Java vẫn truyền tham số theo pass-by-value, nhưng giá trị được truyền là bản sao của tham chiếu đến đối tượng jungleDVD.
+Do đó:
+	Biến dvd trong hàm và jungleDVD bên ngoài đều trỏ đến cùng một đối tượng trong bộ nhớ
+	Khi gọi setTitle(), ta đang thay đổi trực tiếp nội dung của đối tượng đó
+Vì vậy, tiêu đề của jungleDVD bị thay đổi.
+Tuy nhiên, khi thực hiện:
+	dvd = new DigitalVideoDisc(oldTitle);
+	thì chỉ thay đổi biến cục bộ dvd, không ảnh hưởng đến jungleDVD bên ngoài.
+Câu 4: Viết phương thức toString() cho lớp DigitalVideoDisc. Kiểu trả về là gì?
+--> Phương thức toString() có kiểu trả về là String. Dùng để trả về thông tin của đối tượng dưới dạng chuỗi
