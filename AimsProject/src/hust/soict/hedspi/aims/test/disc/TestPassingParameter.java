@@ -1,4 +1,4 @@
-package hust.soict.hedspi.aims.test;
+package hust.soict.hedspi.aims.test.disc;
 import hust.soict.hedspi.aims.disc.DigitalVideoDisc;
 
 public class TestPassingParameter {
