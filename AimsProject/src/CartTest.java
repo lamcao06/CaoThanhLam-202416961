@@ -10,5 +10,7 @@ public class CartTest {
         cart.addDigitalVideoDisc(dvd6);
         cart.addDigitalVideoDisc(dvd7);
         cart.printcart();
+        cart.searchById(2);
+        cart.searchByTitle("Dragon ball");
     }
 }
