@@ -15,10 +15,6 @@ public class Aims {
         DigitalVideoDisc[] store = {dvd1, dvd2, dvd3, dvd4, dvd5, dvd6, dvd7, dvd8, dvd9, dvd10};
         Scanner sc = new Scanner(System.in);
         int opt;
-        System.out.println(dvd1.getId());
-        System.out.println(dvd2.getId());
-        System.out.println(dvd3.getId());
-
         while(true){
             System.out.println("Please enter an option (1-4)");
             System.out.println("Option 1: Add a DVD ");
