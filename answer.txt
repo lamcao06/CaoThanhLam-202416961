@@ -1,0 +1,76 @@
+Question 1:
+Lớp nào nên implement interface Comparable?
+
+Answer:
+Lớp Media nên implement interface Comparable vì đây là lớp cha của các loại media như Book, DigitalVideoDisc và CompactDisc. Việc implement Comparable trong lớp Media cho phép các đối tượng media được sắp xếp theo một thứ tự mặc định.
+
+
+Question 2:
+Trong các lớp đó, phương thức compareTo() nên được cài đặt như thế nào để phản ánh đúng thứ tự mong muốn?
+
+Answer:
+Phương thức compareTo() có thể được cài đặt để so sánh theo title trước, sau đó mới so sánh theo cost nếu title giống nhau.
+
+Ví dụ:
+
+public int compareTo(Media other) {
+    int titleComparison =
+        this.getTitle().compareTo(other.getTitle());
+
+    if (titleComparison != 0) {
+        return titleComparison;
+    } else {
+        return Double.compare(
+            this.getCost(),
+            other.getCost()
+        );
+    }
+}
+
+
+Question 3:
+Có thể có hai quy tắc sắp xếp khác nhau (theo title rồi cost và theo cost rồi title) nếu sử dụng Comparable hay không?
+
+Answer:
+Không thể thực hiện điều đó chỉ với Comparable.
+
+Lý do là Comparable chỉ có một phương thức compareTo(), nên mỗi lớp chỉ có thể định nghĩa một thứ tự sắp xếp mặc định duy nhất. Nếu muốn có nhiều cách sắp xếp khác nhau, ta cần sử dụng Comparator thay vì Comparable.
+
+
+Question 4:
+Giả sử DVD có quy tắc sắp xếp khác với các media khác, cụ thể là theo title, sau đó theo length giảm dần, rồi mới theo cost. Bạn sẽ sửa code như thế nào?
+
+Answer:
+Ta nên tạo một Comparator riêng cho lớp DigitalVideoDisc để định nghĩa quy tắc sắp xếp đặc biệt này.
+
+Ví dụ:
+
+public int compare(
+        DigitalVideoDisc dvd1,
+        DigitalVideoDisc dvd2) {
+
+    int titleCompare =
+        dvd1.getTitle().compareTo(dvd2.getTitle());
+
+    if (titleCompare != 0)
+        return titleCompare;
+
+    int lengthCompare =
+        Integer.compare(
+            dvd2.getLength(),
+            dvd1.getLength()
+        );
+
+    if (lengthCompare != 0)
+        return lengthCompare;
+
+    return Float.compare(
+        dvd1.getCost(),
+        dvd2.getCost()
+    );
+}
+
+Trong đó:
+- title được so sánh tăng dần
+- length được so sánh giảm dần
+- cost được dùng để so sánh cuối cùng
