@@ -1,0 +1,3 @@
+Question:
+What happens when you don't update for them to catch?
+- PlayerException là một checked exception. Nếu không bắt (catch) hoặc khai báo throws phù hợp, chương trình sẽ báo lỗi biên dịch. Nếu ngoại lệ xảy ra trong lúc chạy mà không được xử lý, chương trình có thể bị dừng và hiển thị thông báo lỗi.

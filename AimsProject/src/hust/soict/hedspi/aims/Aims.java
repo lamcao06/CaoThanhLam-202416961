@@ -1,0 +1,50 @@
+package hust.soict.hedspi.aims;
+
+import javax.swing.SwingUtilities;
+
+import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.media.Book;
+import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.media.DigitalVideoDisc;
+import hust.soict.hedspi.aims.screen.StoreScreen;
+import hust.soict.hedspi.aims.store.Store;
+
+public class Aims {
+    public static void main(String[] args) {
+
+
+        Store store = new Store();
+        Cart cart = new Cart();
+
+
+        // DVDs
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 121, 24.95f);
+        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Inception", "Sci-Fi", "Christopher Nolan", 148, 15.99f);
+
+        // Books
+        Book book1 = new Book("Java Programming", "Programming", 45.50f);
+        Book book2 = new Book("Design Patterns", "Programming", 65.00f);
+        Book book3 = new Book("Clean Code", "Programming", 50.00f);
+
+        // CDs
+        CompactDisc cd1 = new CompactDisc("Divide", "Pop", 10.00f, "Ed Sheeran");
+        CompactDisc cd2 = new CompactDisc("Thriller", "Pop", 15.00f, "Michael Jackson");
+        CompactDisc cd3 = new CompactDisc("Dark Side", "Rock", 30.00f, "Pink Floyd");
+
+        store.addMedia(dvd1);
+        store.addMedia(dvd2);
+        store.addMedia(book1);
+        store.addMedia(cd1);
+        store.addMedia(dvd3);
+        store.addMedia(book2);
+        store.addMedia(cd2);
+        store.addMedia(book3);
+        store.addMedia(cd3);
+
+
+        SwingUtilities.invokeLater(() -> {
+            new StoreScreen(store, cart);
+        });
+    }
+}

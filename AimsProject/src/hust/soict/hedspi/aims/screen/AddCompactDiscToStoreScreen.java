@@ -1,0 +1,77 @@
+package hust.soict.hedspi.aims.screen;
+
+import javax.swing.*;
+
+import hust.soict.hedspi.aims.cart.Cart;
+import hust.soict.hedspi.aims.media.CompactDisc;
+import hust.soict.hedspi.aims.screen.StoreScreen;
+import hust.soict.hedspi.aims.store.Store;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.*;
+
+public class AddCompactDiscToStoreScreen extends AddItemToStoreScreen {
+    private JTextField tfTitle, tfCategory, tfCost, tfArtist;
+
+    public AddCompactDiscToStoreScreen(Store store, Cart cart, StoreScreen storeScreen) {
+        super(store, cart, storeScreen);
+        setTitle("Add CD to Store");
+    }
+
+    @Override
+    protected JPanel createCenter() {
+        JPanel center = new JPanel(new GridLayout(5, 2, 10, 10)); // 5 dòng (4 trường + 1 nút)
+
+        center.add(new JLabel("Title:"));
+        tfTitle = new JTextField(20);
+        center.add(tfTitle);
+
+        center.add(new JLabel("Category:"));
+        tfCategory = new JTextField(20);
+        center.add(tfCategory);
+
+        center.add(new JLabel("Cost:"));
+        tfCost = new JTextField(20);
+        center.add(tfCost);
+
+        center.add(new JLabel("Artist:"));
+        tfArtist = new JTextField(20);
+        center.add(tfArtist);
+
+        JButton btnSave = new JButton("Save CD");
+        btnSave.addActionListener(new SaveCDListener());
+
+        center.add(new JPanel()); // Ô trống
+        center.add(btnSave);
+
+        return center;
+    }
+
+    private class SaveCDListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String title = tfTitle.getText();
+            String category = tfCategory.getText();
+            String artist = tfArtist.getText();
+
+            float cost = 0.0f;
+            try {
+                cost = Float.parseFloat(tfCost.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(AddCompactDiscToStoreScreen.this,
+                        "Cost phải là số.", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            CompactDisc cd = new CompactDisc(title, category, cost, artist);
+            store.addMedia(cd);
+
+            showSuccessDialog(cd.getTitle());
+            if (storeScreen != null) {
+                storeScreen.refresh();
+            }
+            dispose();
+        }
+    }
+}
